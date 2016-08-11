@@ -13,6 +13,7 @@
 		E0F319951D5CDDD700FBA78F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F319931D5CDDD700FBA78F /* LaunchScreen.storyboard */; };
 		E0F319A01D5CDDD700FBA78F /* BooksAndMusicSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F3199F1D5CDDD700FBA78F /* BooksAndMusicSearchTests.swift */; };
 		E0F319AB1D5CDDD700FBA78F /* BooksAndMusicSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F319AA1D5CDDD700FBA78F /* BooksAndMusicSearchUITests.swift */; };
+		E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F319BB1D5CEA2C00FBA78F /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		E0F319A61D5CDDD700FBA78F /* BooksAndMusicSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BooksAndMusicSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F319AA1D5CDDD700FBA78F /* BooksAndMusicSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAndMusicSearchUITests.swift; sourceTree = "<group>"; };
 		E0F319AC1D5CDDD700FBA78F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0F319BB1D5CEA2C00FBA78F /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		E0F319891D5CDDD600FBA78F /* BooksAndMusicSearch */ = {
 			isa = PBXGroup;
 			children = (
+				E0F319BA1D5CE9F200FBA78F /* ViewControllers */,
 				E0F319B91D5CE5D500FBA78F /* Storyboards */,
 				E0F319B81D5CE56600FBA78F /* App */,
 			);
@@ -136,6 +139,14 @@
 				E0F319931D5CDDD700FBA78F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E0F319BA1D5CE9F200FBA78F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0F319BB1D5CEA2C00FBA78F /* MainViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +217,7 @@
 				TargetAttributes = {
 					E0F319861D5CDDD600FBA78F = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = B2328STN6B;
 					};
 					E0F3199A1D5CDDD700FBA78F = {
 						CreatedOnToolsVersion = 7.3;
@@ -270,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */,
+				E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +424,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = BooksAndMusicSearch/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/BooksAndMusicSearch/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joli.BooksAndMusicSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,7 +436,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = BooksAndMusicSearch/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/BooksAndMusicSearch/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joli.BooksAndMusicSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
