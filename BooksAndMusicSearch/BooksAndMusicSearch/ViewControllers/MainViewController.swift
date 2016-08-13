@@ -9,11 +9,11 @@
 import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let kMusicTableSection = 0
-    let kBooksTableSection = 1
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    let kMusicTableSection = 0
+    let kBooksTableSection = 1
     
     
     // MARK: - Lifecycle
