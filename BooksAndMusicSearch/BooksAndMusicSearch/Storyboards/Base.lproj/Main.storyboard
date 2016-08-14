@@ -17,10 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RPP-wS-Ffx">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqI-pl-lV6">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="pCR-uQ-i02"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VG5-Xi-mPp">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -51,24 +54,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VG5-Xi-mPp" firstAttribute="leading" secondItem="Pf1-W6-2XE" secondAttribute="leading" id="0nw-Ow-tUT"/>
-                            <constraint firstItem="VG5-Xi-mPp" firstAttribute="top" secondItem="RPP-wS-Ffx" secondAttribute="bottom" id="HJU-PF-ar3"/>
-                            <constraint firstAttribute="trailing" secondItem="VG5-Xi-mPp" secondAttribute="trailing" id="eTS-05-xWV"/>
-                            <constraint firstItem="RPP-wS-Ffx" firstAttribute="leading" secondItem="Pf1-W6-2XE" secondAttribute="leading" id="fe4-rs-2h5"/>
-                            <constraint firstItem="RPP-wS-Ffx" firstAttribute="top" secondItem="pcq-hx-6IE" secondAttribute="bottom" id="mef-hC-Adu"/>
-                            <constraint firstAttribute="trailing" secondItem="RPP-wS-Ffx" secondAttribute="trailing" id="qBs-VM-FDP"/>
-                            <constraint firstItem="fkh-Ac-Jm3" firstAttribute="top" secondItem="VG5-Xi-mPp" secondAttribute="bottom" id="xsm-mX-nBX"/>
+                            <constraint firstItem="tqI-pl-lV6" firstAttribute="top" secondItem="pcq-hx-6IE" secondAttribute="bottom" id="QeH-zQ-Waw"/>
+                            <constraint firstItem="tqI-pl-lV6" firstAttribute="leading" secondItem="Pf1-W6-2XE" secondAttribute="leading" id="UmY-GB-qPq"/>
+                            <constraint firstItem="VG5-Xi-mPp" firstAttribute="top" secondItem="tqI-pl-lV6" secondAttribute="bottom" id="d22-6R-IQm"/>
+                            <constraint firstAttribute="trailing" secondItem="tqI-pl-lV6" secondAttribute="trailing" id="dry-Hq-pQ7"/>
+                            <constraint firstItem="VG5-Xi-mPp" firstAttribute="leading" secondItem="Pf1-W6-2XE" secondAttribute="leading" id="iMr-Tk-jn6"/>
+                            <constraint firstAttribute="trailing" secondItem="VG5-Xi-mPp" secondAttribute="trailing" id="n7J-aI-M8t"/>
+                            <constraint firstItem="fkh-Ac-Jm3" firstAttribute="top" secondItem="VG5-Xi-mPp" secondAttribute="bottom" id="usY-k6-GK3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="22S-2z-CPe"/>
                     <connections>
-                        <outlet property="searchBar" destination="RPP-wS-Ffx" id="9y1-4K-Lsr"/>
+                        <outlet property="searchBarPlaceholderView" destination="tqI-pl-lV6" id="dkR-c4-NKD"/>
                         <outlet property="tableView" destination="VG5-Xi-mPp" id="C72-oM-tYU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjQ-5R-eZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2182" y="511"/>
+            <point key="canvasLocation" x="2152" y="511"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="x2s-Kk-IVf">

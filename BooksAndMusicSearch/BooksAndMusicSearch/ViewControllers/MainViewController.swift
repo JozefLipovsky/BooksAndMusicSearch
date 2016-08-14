@@ -8,41 +8,60 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var searchBar: UISearchBar!
+class MainViewController: UIViewController {
+    
+    @IBOutlet weak var searchBarPlaceholderView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
-    let kMusicTableSection = 0
-    let kBooksTableSection = 1
-    
+
+    var musicDataSource = [String]()
+    var booksDataSource = [String]()
+    var searchController: UISearchController!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func setupUI() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.placeholder = "Search"
+        definesPresentationContext = true
+        searchBarPlaceholderView.addSubview(searchController.searchBar)
+        
+        tableView.separatorStyle = .None
+
+        let backgroundLabel = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+        backgroundLabel.text = "Tap on search bar and start typing to begin new search..."
+        backgroundLabel.textAlignment = .Center
+        backgroundLabel.numberOfLines = 0
+        tableView.backgroundView = backgroundLabel
     }
-    
-    
+}
+
+
+extension MainViewController: UITableViewDataSource {
+   
     // MARK: - TableView Data Source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard searchController.active else {
+            return 0
+        }
+        
         switch section {
-        case kMusicTableSection:
+        case 0:
             // music data source count
-            return 2
-        case kBooksTableSection:
+            return 1
+        case 1:
             // music data source count
             return 3
         default:
@@ -50,15 +69,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
         
         switch indexPath.section {
-        case kMusicTableSection:
+        case 0:
             cell = tableView.dequeueReusableCellWithIdentifier("MusicCell", forIndexPath: indexPath) as UITableViewCell
             
-        case kBooksTableSection:
+        case 1:
             cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as UITableViewCell
             
         default:
@@ -68,18 +86,41 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard searchController.active else {
+            return ""
+        }
+        
         switch section {
-        case kMusicTableSection:
+        case 0:
             return "Music"
-        case kBooksTableSection:
+        case 1:
             return "Books"
         default:
             return nil
         }
     }
+}
+
+
+extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     
+    // MARK: - SearchResults Updating
     
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let keyWord = searchController.searchBar.text where !keyWord.isEmpty {
+            // search request
+        }
+    }
+    
+    // MARK: - SearchResults Delegate
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        // clean search results state, set empty state
+    }
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        // clean empty state, set search results state
+    }
     
 }
