@@ -9,12 +9,11 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
     @IBOutlet weak var searchBarPlaceholderView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
-    var musicDataSource = [String]()
-    var booksDataSource = [String]()
+    var musicDataSource: [String] = []
+    var booksDataSource: [String] = []
     var searchController: UISearchController!
     
     // MARK: - Lifecycle
@@ -35,7 +34,8 @@ class MainViewController: UIViewController {
         
         tableView.separatorStyle = .None
 
-        let backgroundLabel = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+        
+        let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
         backgroundLabel.text = "Tap on search bar and start typing to begin new search..."
         backgroundLabel.textAlignment = .Center
         backgroundLabel.numberOfLines = 0
@@ -43,11 +43,9 @@ class MainViewController: UIViewController {
     }
 }
 
-
+// MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
    
-    // MARK: - TableView Data Source
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -102,18 +100,14 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-
+// MARK: - UISearchResultsUpdating and UISearchControllerDelegate
 extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-    
-    // MARK: - SearchResults Updating
-    
+
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if let keyWord = searchController.searchBar.text where !keyWord.isEmpty {
             // search request
         }
     }
-    
-    // MARK: - SearchResults Delegate
     
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
@@ -122,5 +116,4 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
     }
-    
 }
