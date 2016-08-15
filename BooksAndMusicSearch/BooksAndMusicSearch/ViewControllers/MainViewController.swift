@@ -121,6 +121,9 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
         
+        
+       
+        
 
         let testString = "test test"
         let keyWord = testString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
