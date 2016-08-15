@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0E9CF861D609FD100B1BF5E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */; };
 		E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F3198A1D5CDDD600FBA78F /* AppDelegate.swift */; };
 		E0F319901D5CDDD600FBA78F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F3198E1D5CDDD600FBA78F /* Main.storyboard */; };
 		E0F319921D5CDDD700FBA78F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F319911D5CDDD700FBA78F /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E0F319871D5CDDD600FBA78F /* BooksAndMusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BooksAndMusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F3198A1D5CDDD600FBA78F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0F3198F1D5CDDD600FBA78F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,6 +76,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0E9CF831D60788200B1BF5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E0E9CF841D608E2B00B1BF5E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		E0F3197E1D5CDDD600FBA78F = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +116,8 @@
 			children = (
 				E0F319BA1D5CE9F200FBA78F /* ViewControllers */,
 				E0F319B91D5CE5D500FBA78F /* Storyboards */,
+				E0E9CF831D60788200B1BF5E /* Models */,
+				E0E9CF841D608E2B00B1BF5E /* Networking */,
 				E0F319B81D5CE56600FBA78F /* App */,
 			);
 			path = BooksAndMusicSearch;
@@ -281,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E9CF861D609FD100B1BF5E /* NetworkManager.swift in Sources */,
 				E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */,
 				E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */,
 			);

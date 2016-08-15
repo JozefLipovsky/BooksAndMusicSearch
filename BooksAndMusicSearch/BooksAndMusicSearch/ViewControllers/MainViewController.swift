@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
 
     var musicDataSource: [String] = []
     var booksDataSource: [String] = []
-    var searchController: UISearchController!
+    var searchController: UISearchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
     
@@ -22,9 +22,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+    
+    // MARK: - Helpers
 
     func setupUI() {
-        searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.delegate = self
@@ -44,6 +45,7 @@ class MainViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
+
 extension MainViewController: UITableViewDataSource {
    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -101,19 +103,33 @@ extension MainViewController: UITableViewDataSource {
 }
 
 // MARK: - UISearchResultsUpdating and UISearchControllerDelegate
+
 extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if let keyWord = searchController.searchBar.text where !keyWord.isEmpty {
             // search request
+            
         }
     }
     
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
+        
     }
     
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
+        
+
+        let testString = "test test"
+        let keyWord = testString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
+       
+        }
+        
+        NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
+            
+        }
     }
 }
