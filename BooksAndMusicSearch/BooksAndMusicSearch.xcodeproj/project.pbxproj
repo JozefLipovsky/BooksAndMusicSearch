@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E07A52191D61BF310051B2FC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A52181D61BF310051B2FC /* Song.swift */; };
 		E07A521B1D61BF490051B2FC /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A521A1D61BF490051B2FC /* Book.swift */; };
+		E09C5F6F1D62306F0025E77A /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C5F6E1D62306F0025E77A /* NetworkOperation.swift */; };
 		E0E9CF861D609FD100B1BF5E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */; };
 		E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F3198A1D5CDDD600FBA78F /* AppDelegate.swift */; };
 		E0F319901D5CDDD600FBA78F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F3198E1D5CDDD600FBA78F /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		E07A52181D61BF310051B2FC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E07A521A1D61BF490051B2FC /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		E09C5F6E1D62306F0025E77A /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E0F319871D5CDDD600FBA78F /* BooksAndMusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BooksAndMusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F3198A1D5CDDD600FBA78F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E9CF851D609FD100B1BF5E /* NetworkManager.swift */,
+				E09C5F6E1D62306F0025E77A /* NetworkOperation.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */,
 				E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */,
 				E07A521B1D61BF490051B2FC /* Book.swift in Sources */,
+				E09C5F6F1D62306F0025E77A /* NetworkOperation.swift in Sources */,
 				E07A52191D61BF310051B2FC /* Song.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
