@@ -109,19 +109,35 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let searchedText = searchBar.text where !searchedText.isEmpty {
             let keyWord = searchedText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+
+//            NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
+//                for song in songs {
+//                    print("Song: \(song.trackName), Author: \(song.artist)")
+//                }
+//            }
+//    
+//            NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
+//                for book in books {
+//                    print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
+//                }
+//            }
             
             
-            NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
+            
+            // test
+            let url = NSURL(string: "https://itunes.apple.com/search?media=music&entity=song&attribute=songTerm&limit=10&term=\(keyWord!)")
+            let request = NSURLRequest(URL: url!)
+            
+            let songsOperation = DownloadRequestOperation.init(withRequest: request)
+            
+            songsOperation.completion = { (songs, error) in
                 for song in songs {
                     print("Song: \(song.trackName), Author: \(song.artist)")
                 }
             }
-    
-            NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
-                for book in books {
-                    print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
-                }
-            }
+            
+            let queue = NSOperationQueue()
+            queue.addOperation(songsOperation)
         }
     }
 

@@ -61,6 +61,7 @@ class NetworkOperation: NSOperation {
         _finished = false
         _cancelled = false
         super.init()
+        print("Network Operation Ready")
     }
 
     
@@ -69,6 +70,7 @@ class NetworkOperation: NSOperation {
         _ready = false
         _finished = false
         _cancelled = false
+        print("Network Operation Started")
     }
     
     
@@ -80,5 +82,6 @@ class NetworkOperation: NSOperation {
     func finish () {
         _finished = true
         _executing = false
+        print("Network Operation Finished")
     }
 }
