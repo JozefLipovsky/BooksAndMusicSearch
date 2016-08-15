@@ -27,9 +27,9 @@ class MainViewController: UIViewController {
 
     func setupUI() {
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchBarPlaceholderView.addSubview(searchController.searchBar)
         
@@ -102,17 +102,29 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - UISearchResultsUpdating and UISearchControllerDelegate
+// MARK: - UISearchControllerDelegate, UISearchBarDelegate
 
-extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let keyWord = searchController.searchBar.text where !keyWord.isEmpty {
-            // search request
+extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        if let searchedText = searchBar.text where !searchedText.isEmpty {
+            let keyWord = searchedText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
             
+            
+            NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
+                for song in songs {
+                    print("Song: \(song.trackName), Author: \(song.artist)")
+                }
+            }
+    
+            NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
+                for book in books {
+                    print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
+                }
+            }
         }
     }
-    
+
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
         
@@ -121,22 +133,5 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
         
-        
-       
-        
-
-        let testString = "test test"
-        let keyWord = testString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
-            for song in songs {
-                print("Song: \(song.trackName), Author: \(song.artist)")
-            }
-        }
-        
-        NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
-            for book in books {
-                print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
-            }
-        }
     }
 }
