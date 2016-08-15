@@ -11,7 +11,7 @@ import Foundation
 
 class NetworkManager {
 
-    class func fetchSongs(withKeyWord keyWord: String, completion:([Music], NSError?) -> Void) -> NSURLSessionDataTask {
+    class func fetchSongs(withKeyWord keyWord: String, completion:([Song], NSError?) -> Void) -> NSURLSessionDataTask {
         let url = NSURL(string: "https://itunes.apple.com/search?media=music&entity=song&attribute=songTerm&limit=10&term=\(keyWord)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession.sharedSession()
@@ -20,6 +20,7 @@ class NetworkManager {
             if let error = error {
                 print(error.localizedDescription)
                 completion([], error)
+                return
             }
             
             if let data = data {
@@ -27,6 +28,7 @@ class NetworkManager {
                 completion(songs, error)
             } else {
                 completion([], error)
+                
             }
             
         }
@@ -46,6 +48,7 @@ class NetworkManager {
             if let error = error {
                 print(error.localizedDescription)
                 completion([], error)
+                return
             }
             
             if let data = data {
@@ -85,15 +88,15 @@ class NetworkManager {
     }
     
     
-    class func musicFromJSON(data: NSData) -> [Music] {
-        var songs: [Music] = []
+    class func musicFromJSON(data: NSData) -> [Song] {
+        var songs: [Song] = []
         
         do {
             if let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject],
                 let results = json["results"] as? [[String: AnyObject]] {
                 for result in results {
-                    if let track = result["trackName"] as? String, let artist = result["artistName"] as? String {
-                        let song = Music.init(track: track, artist: artist)
+                    if let trackName = result["trackName"] as? String, let artist = result["artistName"] as? String {
+                        let song = Song.init(trackName: trackName, artist: artist)
                         songs.append(song)
                     }
                 }

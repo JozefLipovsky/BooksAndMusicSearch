@@ -59,10 +59,10 @@ extension MainViewController: UITableViewDataSource {
         
         switch section {
         case 0:
-            // music data source count
+            // Song data source count
             return 1
         case 1:
-            // music data source count
+            // Song data source count
             return 3
         default:
             return 0
@@ -93,7 +93,7 @@ extension MainViewController: UITableViewDataSource {
         
         switch section {
         case 0:
-            return "Music"
+            return "Song"
         case 1:
             return "Books"
         default:
@@ -129,7 +129,7 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
         let keyWord = testString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
             for song in songs {
-                print("Song: \(song.track), Author: \(song.artist)")
+                print("Song: \(song.trackName), Author: \(song.artist)")
             }
         }
         

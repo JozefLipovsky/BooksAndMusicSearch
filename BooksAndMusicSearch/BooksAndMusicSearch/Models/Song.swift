@@ -1,5 +1,5 @@
 //
-//  Music.swift
+//  Song.swift
 //  BooksAndMusicSearch
 //
 //  Created by JoLi on 2016-08-15.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class Music {
-    var track: String
+class Song {
+    var trackName: String
     var artist: String
     
-    init(track: String, artist: String) {
-        self.track = track
+    init(trackName: String, artist: String) {
+        self.trackName = trackName
         self.artist = artist
     }
 }
