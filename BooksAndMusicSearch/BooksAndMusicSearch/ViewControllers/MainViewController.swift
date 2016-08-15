@@ -128,11 +128,15 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
         let testString = "test test"
         let keyWord = testString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
-       
+            for song in songs {
+                print("Song: \(song.track), Author: \(song.artist)")
+            }
         }
         
         NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
-            
+            for book in books {
+                print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
+            }
         }
     }
 }
