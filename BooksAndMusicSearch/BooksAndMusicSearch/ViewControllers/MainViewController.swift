@@ -12,8 +12,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchBarPlaceholderView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
-    var musicDataSource: [String] = []
-    var booksDataSource: [String] = []
+    var musicDataSource: [Song] = []
+    var booksDataSource: [Book] = []
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
@@ -59,11 +59,9 @@ extension MainViewController: UITableViewDataSource {
         
         switch section {
         case 0:
-            // Song data source count
-            return 1
+            return musicDataSource.count
         case 1:
-            // Song data source count
-            return 3
+            return booksDataSource.count
         default:
             return 0
         }
@@ -109,45 +107,60 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let searchedText = searchBar.text where !searchedText.isEmpty {
             let keyWord = searchedText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-
-//            NetworkManager.fetchSongs(withKeyWord: keyWord!) { (songs, error) in
-//                for song in songs {
-//                    print("Song: \(song.trackName), Author: \(song.artist)")
-//                }
-//            }
-//    
-//            NetworkManager.fetchBooks(withKeyWord: keyWord!) { (books, error) in
-//                for book in books {
-//                    print("Book: \(book.title), Authors: \(book.allAuthorsNames)")
-//                }
-//            }
             
-            
-            
-            // test
-            let url = NSURL(string: "https://itunes.apple.com/search?media=music&entity=song&attribute=songTerm&limit=10&term=\(keyWord!)")
-            let request = NSURLRequest(URL: url!)
-            
-            let songsOperation = DownloadRequestOperation.init(withRequest: request)
-            
-            songsOperation.completion = { (songs, error) in
+            let musicSearch = MusicSearchOperation.init(with: keyWord!)
+            musicSearch.completion = { (songs, error) in
+                self.musicDataSource = songs
+                
                 for song in songs {
                     print("Song: \(song.trackName), Author: \(song.artist)")
                 }
             }
             
+            
+            let booksSearch = BooksSearchOperation.init(with: keyWord!)
+            booksSearch.completion = { (books, error) in
+                self.booksDataSource = books
+                
+                for book in books {
+                    print("Book: \(book.title), Author: \(book.allAuthorsNames)")
+                }
+            }
+            
+            
+            
+            
+            let searchCompletion = NSOperation()
+            searchCompletion.completionBlock = {
+                print("Both search operations finished")
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    self.tableView.reloadData()
+                })
+            }
+
+            
+            searchCompletion.addDependency(musicSearch)
+            searchCompletion.addDependency(booksSearch)
+            
+        
             let queue = NSOperationQueue()
-            queue.addOperation(songsOperation)
+            queue.addOperation(searchCompletion)
+            queue.addOperation(musicSearch)
+            queue.addOperation(booksSearch)
         }
     }
 
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
-        
+        musicDataSource.removeAll()
+        booksDataSource.removeAll()
+        tableView.backgroundView?.hidden = false
+        tableView.reloadData()
     }
     
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
-        
+        tableView.backgroundView?.hidden = true
+        tableView.reloadData()
     }
 }

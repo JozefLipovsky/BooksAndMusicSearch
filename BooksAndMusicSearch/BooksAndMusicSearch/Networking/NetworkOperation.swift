@@ -34,10 +34,10 @@ class NetworkOperation: NSOperation {
     override var finished: Bool { return _finished }
     private var _finished: Bool {
         willSet {
-            willChangeValueForKey("isExecuting")
+            willChangeValueForKey("isFinished")
         }
         didSet {
-            didChangeValueForKey("isExecuting")
+            didChangeValueForKey("isFinished")
         }
     }
     
@@ -54,6 +54,7 @@ class NetworkOperation: NSOperation {
     override var asynchronous: Bool { return true }
     
     
+    // MARK: - Execute
     
     override init() {
         _ready = true
@@ -66,11 +67,13 @@ class NetworkOperation: NSOperation {
 
     
     override func start() {
-        _executing = true
-        _ready = false
-        _finished = false
-        _cancelled = false
-        print("Network Operation Started")
+        if !_executing {
+            _executing = true
+            _ready = false
+            _finished = false
+            _cancelled = false
+            print("Network Operation Started")
+        }
     }
     
     
