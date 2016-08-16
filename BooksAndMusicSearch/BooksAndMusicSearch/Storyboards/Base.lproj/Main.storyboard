@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -28,21 +29,79 @@
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicCell" id="h9C-zI-XLx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicCell" id="h9C-zI-XLx" customClass="MusicTableViewCell" customModule="BooksAndMusicSearch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9C-zI-XLx" id="Ulo-vi-7kU">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="h9C-zI-XLx" id="Ulo-vi-7kU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q4x-Tn-dlA">
+                                                    <rect key="frame" x="15" y="4" width="577" height="35"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-g5-BId">
+                                                            <rect key="frame" x="0.0" y="0.0" width="577" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9v-vI-deZ">
+                                                            <rect key="frame" x="0.0" y="21" width="577" height="14"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Q4x-Tn-dlA" firstAttribute="leading" secondItem="Ulo-vi-7kU" secondAttribute="leadingMargin" id="DAG-w0-fJe"/>
+                                                <constraint firstAttribute="trailing" secondItem="Q4x-Tn-dlA" secondAttribute="trailing" constant="8" id="Mag-rg-gn0"/>
+                                                <constraint firstItem="Q4x-Tn-dlA" firstAttribute="top" secondItem="Ulo-vi-7kU" secondAttribute="top" constant="4" id="gJK-cQ-TL8"/>
+                                                <constraint firstAttribute="bottom" secondItem="Q4x-Tn-dlA" secondAttribute="bottom" constant="4" id="x8P-vH-55e"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorLabel" destination="p9v-vI-deZ" id="ZmG-EI-hoE"/>
+                                            <outlet property="trackTitleLabel" destination="361-g5-BId" id="f2f-9M-qtk"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="Ps8-Zf-ZRz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="Ps8-Zf-ZRz" customClass="BookTableViewCell" customModule="BooksAndMusicSearch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ps8-Zf-ZRz" id="hnQ-qD-pfs">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ps8-Zf-ZRz" id="hnQ-qD-pfs">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AEr-94-kZu">
+                                                    <rect key="frame" x="15" y="4" width="577" height="35"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXD-sO-VOr">
+                                                            <rect key="frame" x="0.0" y="0.0" width="577" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="authors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMQ-Jd-JcW">
+                                                            <rect key="frame" x="0.0" y="21" width="577" height="14"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AEr-94-kZu" firstAttribute="top" secondItem="hnQ-qD-pfs" secondAttribute="top" constant="4" id="3Wd-Ie-15c"/>
+                                                <constraint firstAttribute="bottom" secondItem="AEr-94-kZu" secondAttribute="bottom" constant="4" id="Kwc-eQ-ec6"/>
+                                                <constraint firstItem="AEr-94-kZu" firstAttribute="leading" secondItem="hnQ-qD-pfs" secondAttribute="leadingMargin" id="eZh-GF-leC"/>
+                                                <constraint firstAttribute="trailing" secondItem="AEr-94-kZu" secondAttribute="trailing" constant="8" id="t46-qD-67d"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorsLabel" destination="JMQ-Jd-JcW" id="AHh-73-xee"/>
+                                            <outlet property="titleLabel" destination="mXD-sO-VOr" id="JfY-Vt-hWC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>

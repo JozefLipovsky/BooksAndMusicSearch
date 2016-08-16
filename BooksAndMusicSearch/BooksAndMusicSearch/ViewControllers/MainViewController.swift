@@ -93,20 +93,21 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
         
-        switch indexPath.section {
-        case 0:
-            cell = tableView.dequeueReusableCellWithIdentifier("MusicCell", forIndexPath: indexPath) as UITableViewCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("MusicCell", forIndexPath: indexPath) as! MusicTableViewCell
+            let track = musicDataSource[indexPath.row]
+            cell.trackTitleLabel.text = track.trackName
+            cell.authorLabel.text = track.artist
+            return cell
             
-        case 1:
-            cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as UITableViewCell
-            
-        default:
-            break
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookTableViewCell
+            let book = booksDataSource[indexPath.row]
+            cell.titleLabel.text = book.title
+            cell.authorsLabel.text = book.allAuthorsNames
+            return cell
         }
-        
-        return cell
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -116,7 +117,7 @@ extension MainViewController: UITableViewDataSource {
         
         switch section {
         case 0:
-            return "Song"
+            return "Songs"
         case 1:
             return "Books"
         default:
@@ -141,12 +142,15 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
         searchManager.queue.cancelAllOperations()
         musicDataSource.removeAll()
         booksDataSource.removeAll()
+        
+        tableView.separatorStyle = .None
         tableView.backgroundView?.hidden = false
         tableView.reloadData()
     }
     
     func willPresentSearchController(searchController: UISearchController) {
         // clean empty state, set search results state
+        tableView.separatorStyle = .SingleLine
         tableView.backgroundView?.hidden = true
         tableView.reloadData()
     }
