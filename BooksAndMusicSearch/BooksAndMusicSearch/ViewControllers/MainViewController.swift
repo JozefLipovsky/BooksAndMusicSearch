@@ -69,9 +69,9 @@ class MainViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource and UITableViewDelegate
 
-extension MainViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -123,6 +123,14 @@ extension MainViewController: UITableViewDataSource {
         default:
             return nil
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44.0
     }
 }
 
