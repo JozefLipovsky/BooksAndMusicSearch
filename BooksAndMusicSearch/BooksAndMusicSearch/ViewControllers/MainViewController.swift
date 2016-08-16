@@ -36,12 +36,36 @@ class MainViewController: UIViewController {
         
         tableView.separatorStyle = .None
 
-        
         let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
         backgroundLabel.text = "Tap on search bar and start typing to begin new search..."
         backgroundLabel.textAlignment = .Center
         backgroundLabel.numberOfLines = 0
         tableView.backgroundView = backgroundLabel
+    }
+    
+    private func performSearchOperationsWithKeyWord(keyWord: String) {
+        let musicSearch = MusicSearchOperation.init(with: keyWord)
+        musicSearch.completion = { (songs, error) in
+            self.musicDataSource = songs
+        }
+        
+        let booksSearch = BooksSearchOperation.init(with: keyWord)
+        booksSearch.completion = { (books, error) in
+            self.booksDataSource = books
+        }
+        
+        
+        let searchCompletion = NSOperation()
+        searchCompletion.completionBlock = {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
+        }
+        
+        searchCompletion.addDependency(musicSearch)
+        searchCompletion.addDependency(booksSearch)
+        
+        searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
     }
 }
 
@@ -108,39 +132,7 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let searchedText = searchBar.text where !searchedText.isEmpty {
             let keyWord = searchedText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            
-            let musicSearch = MusicSearchOperation.init(with: keyWord!)
-            musicSearch.completion = { (songs, error) in
-                self.musicDataSource = songs
-                
-                for song in songs {
-                    print("Song: \(song.trackName), Author: \(song.artist)")
-                }
-            }
-            
-            let booksSearch = BooksSearchOperation.init(with: keyWord!)
-            booksSearch.completion = { (books, error) in
-                self.booksDataSource = books
-                
-                for book in books {
-                    print("Book: \(book.title), Author: \(book.allAuthorsNames)")
-                }
-            }
-            
-            
-            let searchCompletion = NSOperation()
-            searchCompletion.completionBlock = {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
-            }
-            
-            
-            searchCompletion.addDependency(musicSearch)
-            searchCompletion.addDependency(booksSearch)
-            
-        
-            searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
+            performSearchOperationsWithKeyWord(keyWord!)
         }
     }
 
