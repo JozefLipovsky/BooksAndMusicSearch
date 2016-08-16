@@ -80,6 +80,7 @@ class NetworkOperation: NSOperation {
     override func cancel() {
         _cancelled = true
         _executing = false
+        print("Network Operation Cancelled")
     }
     
     func finish () {

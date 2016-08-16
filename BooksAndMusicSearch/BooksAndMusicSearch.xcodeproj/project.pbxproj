@@ -10,6 +10,7 @@
 		E072F5891D6339D80054C984 /* SearchNetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F5881D6339D80054C984 /* SearchNetworkOperation.swift */; };
 		E072F58B1D633B970054C984 /* MusicSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F58A1D633B970054C984 /* MusicSearchOperation.swift */; };
 		E072F58D1D6346710054C984 /* BooksSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F58C1D6346710054C984 /* BooksSearchOperation.swift */; };
+		E072F58F1D636CA30054C984 /* SearchOperationsManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F58E1D636CA30054C984 /* SearchOperationsManger.swift */; };
 		E07A52191D61BF310051B2FC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A52181D61BF310051B2FC /* Song.swift */; };
 		E07A521B1D61BF490051B2FC /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A521A1D61BF490051B2FC /* Book.swift */; };
 		E09C5F6F1D62306F0025E77A /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C5F6E1D62306F0025E77A /* NetworkOperation.swift */; };
@@ -43,6 +44,7 @@
 		E072F5881D6339D80054C984 /* SearchNetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNetworkOperation.swift; sourceTree = "<group>"; };
 		E072F58A1D633B970054C984 /* MusicSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSearchOperation.swift; sourceTree = "<group>"; };
 		E072F58C1D6346710054C984 /* BooksSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksSearchOperation.swift; sourceTree = "<group>"; };
+		E072F58E1D636CA30054C984 /* SearchOperationsManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchOperationsManger.swift; sourceTree = "<group>"; };
 		E07A52181D61BF310051B2FC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E07A521A1D61BF490051B2FC /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E09C5F6E1D62306F0025E77A /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				E072F5881D6339D80054C984 /* SearchNetworkOperation.swift */,
 				E072F58A1D633B970054C984 /* MusicSearchOperation.swift */,
 				E072F58C1D6346710054C984 /* BooksSearchOperation.swift */,
+				E072F58E1D636CA30054C984 /* SearchOperationsManger.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			files = (
 				E072F5891D6339D80054C984 /* SearchNetworkOperation.swift in Sources */,
 				E0F3198B1D5CDDD600FBA78F /* AppDelegate.swift in Sources */,
+				E072F58F1D636CA30054C984 /* SearchOperationsManger.swift in Sources */,
 				E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */,
 				E07A521B1D61BF490051B2FC /* Book.swift in Sources */,
 				E09C5F6F1D62306F0025E77A /* NetworkOperation.swift in Sources */,
@@ -469,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joli.BooksAndMusicSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -481,6 +486,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joli.BooksAndMusicSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

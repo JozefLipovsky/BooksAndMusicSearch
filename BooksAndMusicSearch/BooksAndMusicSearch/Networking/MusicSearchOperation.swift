@@ -10,6 +10,7 @@ import Foundation
 
 
 class MusicSearchOperation: NetworkOperation, SearchNetworkOperation {
+    private var task: NSURLSessionDataTask?
     var keyWord: String
     var completion: (([Song], NSError?) -> Void) = { _ in }
     var url: NSURL {
@@ -27,8 +28,9 @@ class MusicSearchOperation: NetworkOperation, SearchNetworkOperation {
     
     override func start() {
         super.start()
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+         task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
             if let error = error {
+                print("Music search error: \(error.localizedDescription)")
                 self.completion([], error)
                 self.finish()
             }
@@ -42,7 +44,12 @@ class MusicSearchOperation: NetworkOperation, SearchNetworkOperation {
                 self.finish()
             }
         }
-        task.resume()
+        task!.resume()
+    }
+    
+    override func cancel() {
+        if let task = task { task.cancel() }
+        super.cancel()
     }
 }
 

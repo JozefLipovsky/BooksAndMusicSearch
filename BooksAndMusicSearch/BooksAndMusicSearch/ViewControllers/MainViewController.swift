@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     var musicDataSource: [Song] = []
     var booksDataSource: [Book] = []
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
+    let searchManager = SearchOperationsManger()
     
     // MARK: - Lifecycle
     
@@ -117,7 +118,6 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
                 }
             }
             
-            
             let booksSearch = BooksSearchOperation.init(with: keyWord!)
             booksSearch.completion = { (books, error) in
                 self.booksDataSource = books
@@ -128,30 +128,25 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
             }
             
             
-            
-            
             let searchCompletion = NSOperation()
             searchCompletion.completionBlock = {
-                print("Both search operations finished")
-                NSOperationQueue.mainQueue().addOperationWithBlock({
+                dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
                 })
             }
-
+            
             
             searchCompletion.addDependency(musicSearch)
             searchCompletion.addDependency(booksSearch)
             
         
-            let queue = NSOperationQueue()
-            queue.addOperation(searchCompletion)
-            queue.addOperation(musicSearch)
-            queue.addOperation(booksSearch)
+            searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
         }
     }
 
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
+        searchManager.queue.cancelAllOperations()
         musicDataSource.removeAll()
         booksDataSource.removeAll()
         tableView.backgroundView?.hidden = false
