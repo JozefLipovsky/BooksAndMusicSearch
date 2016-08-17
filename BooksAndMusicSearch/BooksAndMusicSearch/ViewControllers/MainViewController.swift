@@ -12,8 +12,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchBarPlaceholderView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
-    var musicDataSource: [Song] = []
-    var booksDataSource: [Book] = []
+    var musicDataSource: [SearchResult] = []
+    var booksDataSource: [SearchResult] = []
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     let searchManager = SearchOperationsManger()
     
@@ -21,7 +21,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupUI()        
+        
     }
     
     // MARK: - Helpers
@@ -97,15 +98,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("MusicCell", forIndexPath: indexPath) as! MusicTableViewCell
             let track = musicDataSource[indexPath.row]
-            cell.trackTitleLabel.text = track.trackName
-            cell.authorLabel.text = track.artist
+            cell.trackTitleLabel.text = track.title
+            cell.authorLabel.text = track.subTitle
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookTableViewCell
             let book = booksDataSource[indexPath.row]
             cell.titleLabel.text = book.title
-            cell.authorsLabel.text = book.allAuthorsNames
+            cell.authorsLabel.text = book.subTitle
             return cell
         }
     }

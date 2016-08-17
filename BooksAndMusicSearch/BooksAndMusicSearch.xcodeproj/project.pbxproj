@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E004FCA71D6478B000FDED1D /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E004FCA61D6478B000FDED1D /* SearchResult.swift */; };
 		E072F5891D6339D80054C984 /* SearchNetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F5881D6339D80054C984 /* SearchNetworkOperation.swift */; };
 		E072F58B1D633B970054C984 /* MusicSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F58A1D633B970054C984 /* MusicSearchOperation.swift */; };
 		E072F58D1D6346710054C984 /* BooksSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072F58C1D6346710054C984 /* BooksSearchOperation.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E004FCA61D6478B000FDED1D /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		E072F5881D6339D80054C984 /* SearchNetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNetworkOperation.swift; sourceTree = "<group>"; };
 		E072F58A1D633B970054C984 /* MusicSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSearchOperation.swift; sourceTree = "<group>"; };
 		E072F58C1D6346710054C984 /* BooksSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksSearchOperation.swift; sourceTree = "<group>"; };
@@ -101,11 +103,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E094E7CC1D63948F00EF825F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E094E7CF1D639BB900EF825F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		E0E9CF831D60788200B1BF5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E07A52181D61BF310051B2FC /* Song.swift */,
 				E07A521A1D61BF490051B2FC /* Book.swift */,
+				E004FCA61D6478B000FDED1D /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,7 +166,9 @@
 				E0F319B91D5CE5D500FBA78F /* Storyboards */,
 				E094E7C31D637D6600EF825F /* Views */,
 				E0E9CF831D60788200B1BF5E /* Models */,
+				E094E7CF1D639BB900EF825F /* ViewModels */,
 				E0E9CF841D608E2B00B1BF5E /* Networking */,
+				E094E7CC1D63948F00EF825F /* Helpers */,
 				E0F319B81D5CE56600FBA78F /* App */,
 			);
 			path = BooksAndMusicSearch;
@@ -339,6 +358,7 @@
 				E0F319BC1D5CEA2C00FBA78F /* MainViewController.swift in Sources */,
 				E07A521B1D61BF490051B2FC /* Book.swift in Sources */,
 				E094E7C61D637D9800EF825F /* MusicTableViewCell.swift in Sources */,
+				E004FCA71D6478B000FDED1D /* SearchResult.swift in Sources */,
 				E09C5F6F1D62306F0025E77A /* NetworkOperation.swift in Sources */,
 				E072F58B1D633B970054C984 /* MusicSearchOperation.swift in Sources */,
 				E072F58D1D6346710054C984 /* BooksSearchOperation.swift in Sources */,

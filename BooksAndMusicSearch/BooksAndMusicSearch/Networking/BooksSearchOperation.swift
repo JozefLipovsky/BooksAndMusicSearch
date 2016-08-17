@@ -11,7 +11,7 @@ import Foundation
 class BooksSearchOperation: NetworkOperation, SearchNetworkOperation {
     private var task: NSURLSessionDataTask?
     var keyWord: String
-    var completion: (([Book], NSError?) -> Void) = { _ in }
+    var completion: (([SearchResult], NSError?) -> Void) = { _ in }
     var url: NSURL {
         return NSURL(string: "https://www.googleapis.com/books/v1/volumes?key=AIzaSyDu60vE57CKAVcZKI0tdrgpQTVOea3PcTo&maxResults=10&q=\(keyWord)+intitle")!
     }
@@ -53,17 +53,16 @@ class BooksSearchOperation: NetworkOperation, SearchNetworkOperation {
 }
 
 extension BooksSearchOperation {
-    func booksFromJSON(data: NSData) -> [Book] {
-        var books: [Book] = []
+    func booksFromJSON(data: NSData) -> [SearchResult] {
+        var books: [SearchResult] = []
         do {
             if let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject],
                 let items = json["items"] as? [[String: AnyObject]] {
                 for item in items {
-                    if let volumeInfo = item["volumeInfo"] as? [String: AnyObject],
-                        let title = volumeInfo["title"] as? String,
-                        let authors = volumeInfo["authors"] as? [String] {
-                        let book = Book.init(title: title, authors: authors)
-                        books.append(book)
+                    if let volumeInfo = item["volumeInfo"] as? [String: AnyObject], let title = volumeInfo["title"] as? String, let authors = volumeInfo["authors"] as? [String] {
+                        let allAuthors = authors.joinWithSeparator(", ");
+                        let searchResult = SearchResult(title: title, subTitle: allAuthors)
+                        books.append(searchResult)
                     }
                 }
             }

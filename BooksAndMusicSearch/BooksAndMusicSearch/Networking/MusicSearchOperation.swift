@@ -12,7 +12,7 @@ import Foundation
 class MusicSearchOperation: NetworkOperation, SearchNetworkOperation {
     private var task: NSURLSessionDataTask?
     var keyWord: String
-    var completion: (([Song], NSError?) -> Void) = { _ in }
+    var completion: (([SearchResult], NSError?) -> Void) = { _ in }
     var url: NSURL {
         return NSURL(string: "https://itunes.apple.com/search?media=music&entity=song&attribute=songTerm&limit=10&term=\(keyWord)")!
     }
@@ -54,14 +54,14 @@ class MusicSearchOperation: NetworkOperation, SearchNetworkOperation {
 }
 
 extension MusicSearchOperation {
-    func musicFromJSON(data: NSData) -> [Song] {
-        var songs: [Song] = []
+    func musicFromJSON(data: NSData) -> [SearchResult] {
+        var songs: [SearchResult] = []
         do {
-            if let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject],
-                let results = json["results"] as? [[String: AnyObject]] {
+            if let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject], let results = json["results"] as? [[String: AnyObject]] {
                 for result in results {
                     if let trackName = result["trackName"] as? String, let artist = result["artistName"] as? String {
-                        songs.append(Song(trackName: trackName, artist: artist))
+                        let searchResult = SearchResult(title: trackName, subTitle: artist)
+                        songs.append(searchResult)
                     }
                 }
             }
