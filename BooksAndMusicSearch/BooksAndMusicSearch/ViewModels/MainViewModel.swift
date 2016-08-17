@@ -8,15 +8,17 @@
 
 import Foundation
 
-public enum SectionType: String {
+enum SectionType: String {
     case Songs, Books
 }
 
-public struct Section<T> {
+struct Section<T> {
     let type: SectionType
     var items: [T]
 }
 
+
+// TODO: add error handling
 class MainViewModel {
     private let searchManager = SearchOperationsManger()
     private var songsResults: Section<SearchResult>
@@ -53,16 +55,15 @@ class MainViewModel {
     func performSearchWithKeyWord(keyWord: String, completion: () -> Void) {
         let musicSearch = MusicSearchOperation(with: keyWord)
         musicSearch.completion = { (songs, error) in
-            self.songsResults.items = songs
+            self.songsResults.items = (songs.count > 0) ? songs : [(SearchResult(title: "No results found for '\(keyWord)", subTitle: ""))]
         }
         
         let booksSearch = BooksSearchOperation(with: keyWord)
         booksSearch.completion = { (books, error) in
-            self.booksResults.items = books
+            self.booksResults.items = (books.count > 0) ? books : [(SearchResult(title: "No results found for '\(keyWord)'", subTitle: ""))]
         }
-        
-        let searchCompletion = NSOperation()
-        searchCompletion.completionBlock = {
+    
+        let searchCompletion = NSBlockOperation {
             dispatch_async(dispatch_get_main_queue(), {
                 completion()
             })
@@ -83,5 +84,7 @@ class MainViewModel {
         booksResults.items.removeAll()
     }
 }
+
+
 
 

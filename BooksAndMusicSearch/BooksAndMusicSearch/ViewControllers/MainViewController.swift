@@ -85,7 +85,6 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     }
 
     func willDismissSearchController(searchController: UISearchController) {
-        // clean search results state, set empty state
         viewModel.cancelSearchOperations()
         viewModel.resetSearchResults()
         
@@ -95,7 +94,6 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     }
     
     func willPresentSearchController(searchController: UISearchController) {
-        // clean empty state, set search results state
         tableView.separatorStyle = .SingleLine
         tableView.backgroundView?.hidden = true
         tableView.reloadData()
