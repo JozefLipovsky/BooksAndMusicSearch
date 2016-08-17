@@ -17,12 +17,20 @@ class MainViewController: UIViewController {
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     let searchManager = SearchOperationsManger()
     
+    var viewModel: MainViewModel!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()        
         
+        // init with empty results
+        let songsResults = Section<SearchResult>(type: .Songs, items: [])
+        let booksResults = Section<SearchResult>(type: .Books, items: [])
+        viewModel = MainViewModel(sections: [songsResults, booksResults] )
+        
+   
     }
     
     // MARK: - Helpers
@@ -36,6 +44,8 @@ class MainViewController: UIViewController {
         searchBarPlaceholderView.addSubview(searchController.searchBar)
         
         tableView.separatorStyle = .None
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
 
         let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
         backgroundLabel.text = "Tap on search bar and start typing to begin new search..."
@@ -73,63 +83,24 @@ class MainViewController: UIViewController {
 // MARK: - UITableViewDataSource and UITableViewDelegate
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
-   
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return viewModel.numberOfSections()
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard searchController.active else {
-            return 0
-        }
-        
-        switch section {
-        case 0:
-            return musicDataSource.count
-        case 1:
-            return booksDataSource.count
-        default:
-            return 0
-        }
+        return viewModel.numberOfRowsForSection(section)
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultCell", forIndexPath: indexPath) as! SearchResultCell
-        if indexPath.section == 0 {
-            let track = musicDataSource[indexPath.row]
-            cell.titleLabel.text = track.title
-            cell.subTitleLabel.text = track.subTitle
-            
-        } else {
-            let book = booksDataSource[indexPath.row]
-            cell.titleLabel.text = book.title
-            cell.subTitleLabel.text = book.subTitle
-        }
-        
+        let searchResult = viewModel.searchResultAtIndexPath(indexPath)
+        cell.titleLabel.text = searchResult.title
+        cell.subTitleLabel.text = searchResult.subTitle
         return cell
     }
-    
+
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard searchController.active else {
-            return ""
-        }
-        
-        switch section {
-        case 0:
-            return "Songs"
-        case 1:
-            return "Books"
-        default:
-            return nil
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44.0
+        return viewModel.headerForSection(section)
     }
 }
 
