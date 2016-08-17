@@ -94,21 +94,19 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultCell", forIndexPath: indexPath) as! SearchResultCell
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MusicCell", forIndexPath: indexPath) as! MusicTableViewCell
             let track = musicDataSource[indexPath.row]
-            cell.trackTitleLabel.text = track.title
-            cell.authorLabel.text = track.subTitle
-            return cell
+            cell.titleLabel.text = track.title
+            cell.subTitleLabel.text = track.subTitle
             
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookTableViewCell
             let book = booksDataSource[indexPath.row]
             cell.titleLabel.text = book.title
-            cell.authorsLabel.text = book.subTitle
-            return cell
+            cell.subTitleLabel.text = book.subTitle
         }
+        
+        return cell
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

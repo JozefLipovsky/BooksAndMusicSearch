@@ -29,45 +29,8 @@
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicCell" id="h9C-zI-XLx" customClass="MusicTableViewCell" customModule="BooksAndMusicSearch" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="Ps8-Zf-ZRz" customClass="SearchResultCell" customModule="BooksAndMusicSearch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="h9C-zI-XLx" id="Ulo-vi-7kU">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q4x-Tn-dlA">
-                                                    <rect key="frame" x="15" y="4" width="577" height="35"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Track" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-g5-BId">
-                                                            <rect key="frame" x="0.0" y="0.0" width="577" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9v-vI-deZ">
-                                                            <rect key="frame" x="0.0" y="21" width="577" height="14"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Q4x-Tn-dlA" firstAttribute="leading" secondItem="Ulo-vi-7kU" secondAttribute="leadingMargin" id="DAG-w0-fJe"/>
-                                                <constraint firstAttribute="trailing" secondItem="Q4x-Tn-dlA" secondAttribute="trailing" constant="8" id="Mag-rg-gn0"/>
-                                                <constraint firstItem="Q4x-Tn-dlA" firstAttribute="top" secondItem="Ulo-vi-7kU" secondAttribute="top" constant="4" id="gJK-cQ-TL8"/>
-                                                <constraint firstAttribute="bottom" secondItem="Q4x-Tn-dlA" secondAttribute="bottom" constant="4" id="x8P-vH-55e"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="authorLabel" destination="p9v-vI-deZ" id="ZmG-EI-hoE"/>
-                                            <outlet property="trackTitleLabel" destination="361-g5-BId" id="f2f-9M-qtk"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="Ps8-Zf-ZRz" customClass="BookTableViewCell" customModule="BooksAndMusicSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="94" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ps8-Zf-ZRz" id="hnQ-qD-pfs">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -82,7 +45,7 @@
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="authors" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMQ-Jd-JcW">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTitle" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMQ-Jd-JcW">
                                                             <rect key="frame" x="0.0" y="21" width="577" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -99,8 +62,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="authorsLabel" destination="JMQ-Jd-JcW" id="AHh-73-xee"/>
-                                            <outlet property="titleLabel" destination="mXD-sO-VOr" id="JfY-Vt-hWC"/>
+                                            <outlet property="subTitleLabel" destination="JMQ-Jd-JcW" id="NAb-tK-E9A"/>
+                                            <outlet property="titleLabel" destination="mXD-sO-VOr" id="UJ5-J2-Bie"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
