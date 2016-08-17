@@ -12,25 +12,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchBarPlaceholderView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
-    var musicDataSource: [SearchResult] = []
-    var booksDataSource: [SearchResult] = []
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     let searchManager = SearchOperationsManger()
-    
-    var viewModel: MainViewModel!
+    var viewModel = MainViewModel()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()        
-        
-        // init with empty results
-        let songsResults = Section<SearchResult>(type: .Songs, items: [])
-        let booksResults = Section<SearchResult>(type: .Books, items: [])
-        viewModel = MainViewModel(sections: [songsResults, booksResults] )
-        
-   
+        setupUI()
     }
     
     // MARK: - Helpers
@@ -52,31 +42,6 @@ class MainViewController: UIViewController {
         backgroundLabel.textAlignment = .Center
         backgroundLabel.numberOfLines = 0
         tableView.backgroundView = backgroundLabel
-    }
-    
-    private func performSearchOperationsWithKeyWord(keyWord: String) {
-        let musicSearch = MusicSearchOperation.init(with: keyWord)
-        musicSearch.completion = { (songs, error) in
-            self.musicDataSource = songs
-        }
-        
-        let booksSearch = BooksSearchOperation.init(with: keyWord)
-        booksSearch.completion = { (books, error) in
-            self.booksDataSource = books
-        }
-        
-        
-        let searchCompletion = NSOperation()
-        searchCompletion.completionBlock = {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-            })
-        }
-        
-        searchCompletion.addDependency(musicSearch)
-        searchCompletion.addDependency(booksSearch)
-        
-        searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
     }
 }
 
@@ -111,15 +76,18 @@ extension MainViewController:  UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let searchedText = searchBar.text where !searchedText.isEmpty {
             let keyWord = searchedText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            performSearchOperationsWithKeyWord(keyWord!)
+            viewModel.performSearchWithKeyWord(keyWord!, completion: { [weak self] in
+                if let tableView = self?.tableView  {
+                    tableView.reloadData()
+                }
+            })
         }
     }
 
     func willDismissSearchController(searchController: UISearchController) {
         // clean search results state, set empty state
-        searchManager.queue.cancelAllOperations()
-        musicDataSource.removeAll()
-        booksDataSource.removeAll()
+        viewModel.cancelSearchOperations()
+        viewModel.resetSearchResults()
         
         tableView.separatorStyle = .None
         tableView.backgroundView?.hidden = false

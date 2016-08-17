@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public enum SectionType: String {
     case Songs, Books
 }
@@ -19,11 +18,19 @@ public struct Section<T> {
 }
 
 class MainViewModel {
-    private var sections:[Section<SearchResult>]
-    
-    init(sections: [Section<SearchResult>]) {
-        self.sections = sections
+    private let searchManager = SearchOperationsManger()
+    private var songsResults: Section<SearchResult>
+    private var booksResults: Section<SearchResult>
+    private var sections: [Section<SearchResult>] {
+        return [songsResults, booksResults]
     }
+    
+    init() {
+        songsResults = Section<SearchResult>(type: .Songs, items: [])
+        booksResults = Section<SearchResult>(type: .Books, items: [])
+    }
+    
+    // MARK: - Table setup
     
     func numberOfSections() -> Int {
         return sections.count
@@ -40,30 +47,41 @@ class MainViewModel {
     func headerForSection(section: Int) -> String {
         return sections[section].items.count > 0 ? sections[section].type.rawValue : ""
     }
+    
+    // MARK: - Search
+    
+    func performSearchWithKeyWord(keyWord: String, completion: () -> Void) {
+        let musicSearch = MusicSearchOperation(with: keyWord)
+        musicSearch.completion = { (songs, error) in
+            self.songsResults.items = songs
+        }
+        
+        let booksSearch = BooksSearchOperation(with: keyWord)
+        booksSearch.completion = { (books, error) in
+            self.booksResults.items = books
+        }
+        
+        let searchCompletion = NSOperation()
+        searchCompletion.completionBlock = {
+            dispatch_async(dispatch_get_main_queue(), {
+                completion()
+            })
+        }
+        
+        searchCompletion.addDependency(musicSearch)
+        searchCompletion.addDependency(booksSearch)
+        
+        searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
+    }
+    
+    func cancelSearchOperations() {
+        searchManager.queue.cancelAllOperations()
+    }
+    
+    func resetSearchResults() {
+        songsResults.items.removeAll()
+        booksResults.items.removeAll()
+    }
 }
 
 
-//private func performSearchOperationsWithKeyWord(keyWord: String) {
-//    let musicSearch = MusicSearchOperation.init(with: keyWord)
-//    musicSearch.completion = { (songs, error) in
-//        self.musicDataSource = songs
-//    }
-//    
-//    let booksSearch = BooksSearchOperation.init(with: keyWord)
-//    booksSearch.completion = { (books, error) in
-//        self.booksDataSource = books
-//    }
-//    
-//    
-//    let searchCompletion = NSOperation()
-//    searchCompletion.completionBlock = {
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.tableView.reloadData()
-//        })
-//    }
-//    
-//    searchCompletion.addDependency(musicSearch)
-//    searchCompletion.addDependency(booksSearch)
-//    
-//    searchManager.addOperations([searchCompletion, musicSearch, booksSearch])
-//}
